@@ -1,3 +1,5 @@
-const generateRandomNumber = require('./utils');
+const { generateRandomNumber, celciusToFahrenheit } = require('./utils');
 
-console.log(`Random Number: ${generateRandomNumber()}`)
+console.log(`Random Number: ${generateRandomNumber()}`);
+
+console.log(`Celcius to fahrenhiet: ${celciusToFahrenheit(0)}`);
