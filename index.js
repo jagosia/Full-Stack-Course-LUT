@@ -1,2 +1,3 @@
-console.log('Hello World!')
-console.log('Git test!')
+const generateRandomNumber = require('./utils');
+
+console.log(`Random Number: ${generateRandomNumber()}`)
