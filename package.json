@@ -1,0 +1,20 @@
+{
+  "name": "nodejs-course-lut",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/jagosia/Full-Stack-Course-LUT#readme",
+  "bugs": {
+    "url": "https://github.com/jagosia/Full-Stack-Course-LUT/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jagosia/Full-Stack-Course-LUT.git"
+  },
+  "license": "ISC",
+  "author": "Małgorzata Jagieła",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
