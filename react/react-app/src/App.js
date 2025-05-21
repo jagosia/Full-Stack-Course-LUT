@@ -1,10 +1,20 @@
-function App() {
-  return (
-    <div className='container'>
-      <h1>Hello From React</h1>
-      <h2>Hello</h2>
-    </div>
-  )
+import React from "react"
+import Header from "./components/Header"
+
+// function App() {
+//   return (
+//     <div className='container'>
+//       <Header />
+//     </div>
+//   )
+// }
+
+// export default App
+
+class App extends React.Component {
+  render() {
+    return <h1>Hello from a class</h1>
+  }
 }
 
 export default App
