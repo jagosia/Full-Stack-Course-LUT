@@ -1,3 +1,5 @@
+const asyncHandler = require('express-async-handler');
+
 // @desc    Get goals
 // @route   GET /api/goals
 // @access  Private
@@ -9,8 +11,13 @@ const getGoals = (req, res) => {
 // @route   POST /api/goals
 // @access  Private
 const setGoal = (req, res) => {
-    res.status(200).json({ message: 'Set goal' });
-};
+    if (!req.body.text) {
+        res.status(400)
+        throw new Error('Please add a text field')
+    }
+
+    res.status(200).json({ message: 'Set goal' })
+}
 
 // @desc    Update goal
 // @route   PUT /api/goals/:id
