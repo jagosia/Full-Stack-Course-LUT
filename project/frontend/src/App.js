@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Login from './pages/Login'
 import Register from './pages/Register'
 import Header from './components/Header'
+import Dashboard from './pages/Dashboard'
 
 function App() {
   return (
@@ -10,9 +11,9 @@ function App() {
       <div className="container">
         <h1>📚 MyBooks</h1>
         <Routes>
+          <Route path="/" element={<Dashboard />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/" element={<div>Dashboard (TODO)</div>} />
         </Routes>
       </div>
     </Router>
