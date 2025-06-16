@@ -10,14 +10,14 @@ function Dashboard() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
-  const { user } = useSelector((state) => state.auth)
-  const { goals, isLoading, isError, message } = useSelector(
+  const { user, isLoading, isError, message } = useSelector((state) => state.auth)
+  let { goals } = useSelector(
     (state) => state.goals
   )
 
   useEffect(() => {
     if (isError) {
-      console.log(message)
+      console.log(message);
     }
 
     if (!user) {

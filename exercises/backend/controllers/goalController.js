@@ -8,7 +8,6 @@ const User = require('../models/userModel')
 // @access  Private
 const getGoals = asyncHandler(async (req, res) => {
   const goals = await Goal.find({ user: req.user.id })
-
   res.status(200).json(goals)
 })
 
@@ -82,7 +81,7 @@ const deleteGoal = asyncHandler(async (req, res) => {
     throw new Error('User not authorized')
   }
 
-  await goal.remove()
+  await Goal.findByIdAndDelete(req.params.id)
 
   res.status(200).json({ id: req.params.id })
 })

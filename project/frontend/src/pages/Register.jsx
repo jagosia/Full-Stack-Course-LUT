@@ -1,59 +1,126 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
+import { FaUser } from 'react-icons/fa'
+import { register, reset } from '../features/auth/authSlice'
+import Spinner from '../components/Spinner'
 
 function Register() {
-  const [name, setName] = useState('')
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    password: '',
+    password2: '',
+  })
 
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-    try {
-      const res = await fetch('http://localhost:5000/api/users', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, password }),
-      })
+  const { name, email, password, password2 } = formData
 
-      const data = await res.json()
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
 
-      if (res.ok) {
-        localStorage.setItem('token', data.token)
-        alert('Registered successfully!')
-        // TODO: redirect to dashboard
-      } else {
-        alert(data.message || 'Registration failed')
-      }
-    } catch (err) {
-      alert('Server error')
+  const { user, isLoading, isError, isSuccess, message } = useSelector(
+    (state) => state.auth
+  )
+
+  useEffect(() => {
+    if (isError) {
+      toast.error(message)
     }
+
+    if (isSuccess || user) {
+      toast.success('Registration successful!')
+      navigate('/')
+    }
+
+    const timer = setTimeout(() => {
+      dispatch(reset())
+    }, 100)
+
+    return () => clearTimeout(timer)
+  }, [user, isError, isSuccess, message, navigate, dispatch])
+
+  const onChange = (e) => {
+    setFormData((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }))
+  }
+
+  const onSubmit = (e) => {
+    e.preventDefault()
+
+    if (password !== password2) {
+      toast.error('Passwords do not match')
+      return
+    }
+
+    dispatch(register({ name, email, password }))
+  }
+
+  if (isLoading) {
+    return <Spinner />
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>Register</h2>
-      <input
-        type="text"
-        placeholder="Name"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-        required
-      />
-      <input
-        type="email"
-        placeholder="Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        required
-      />
-      <input
-        type="password"
-        placeholder="Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        required
-      />
-      <button type="submit">Register</button>
-    </form>
+    <section className="auth-container">
+      <div className="auth-card">
+        <h1 className="auth-title">
+          <FaUser /> Register
+        </h1>
+        <p className="auth-subtitle">Create a new MyBooks account</p>
+
+        <form onSubmit={onSubmit}>
+          <div className="form-group">
+            <input
+              type="text"
+              className="form-control"
+              name="name"
+              value={name}
+              placeholder="Enter your name"
+              onChange={onChange}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <input
+              type="email"
+              className="form-control"
+              name="email"
+              value={email}
+              placeholder="Enter your email"
+              onChange={onChange}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <input
+              type="password"
+              className="form-control"
+              name="password"
+              value={password}
+              placeholder="Enter password"
+              onChange={onChange}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <input
+              type="password"
+              className="form-control"
+              name="password2"
+              value={password2}
+              placeholder="Confirm password"
+              onChange={onChange}
+              required
+            />
+          </div>
+          <button type="submit" className="btn btn-block">
+            Register
+          </button>
+        </form>
+      </div>
+    </section>
   )
 }
 
