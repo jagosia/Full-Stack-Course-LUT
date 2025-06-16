@@ -35,7 +35,7 @@ function Dashboard() {
             <>
                 <div className="dashboard">
                     <h2>Your Reading Dashboard</h2>
-                    <p>Manage your reading list here.</p>
+                    <p>Add book to your list:</p>
                     <BookForm />
                 </div>
 

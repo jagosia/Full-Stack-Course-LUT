@@ -17,11 +17,12 @@ function BookForm() {
     }
 
     return (
-        <section className='form'>
+        <section className='form book-form'>
             <form onSubmit={onSubmit}>
                 <div className='form-group'>
-                    <label htmlFor='text'>Title</label>
                     <input
+                        className='form-control'
+                        placeholder='Enter the book title'
                         type='text'
                         name='title'
                         id='title'
@@ -30,8 +31,9 @@ function BookForm() {
                     />
                 </div>
                 <div className='form-group'>
-                    <label htmlFor='text'>Author</label>
                     <input
+                        className='form-control'
+                        placeholder='Enter the author name'
                         type='text'
                         name='author'
                         id='author'
