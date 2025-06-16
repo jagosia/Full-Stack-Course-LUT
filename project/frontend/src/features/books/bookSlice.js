@@ -13,7 +13,6 @@ const initialState = {
 export const createBook = createAsyncThunk(
   'books/create',
   async (bookData, thunkAPI) => {
-    debugger;
     try {
       const token = thunkAPI.getState().auth.user.token
       return await bookService.createBook(bookData, token)
@@ -58,7 +57,7 @@ function getErrorMessage(error) {
 }
 
 export const bookSlice = createSlice({
-  name: 'book',
+  name: 'books',
   initialState,
   reducers: {
     reset: (state) => initialState,
