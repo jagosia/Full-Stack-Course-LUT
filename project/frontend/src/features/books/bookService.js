@@ -17,10 +17,17 @@ const getBooks = async (token) => {
 }
 
 // Delete user book
-const deleteBook = async (goalId, token) => {
-    await axios.delete(API_URL + goalId, getHeader(token))
+const deleteBook = async (bookId, token) => {
+    await axios.delete(API_URL + bookId, getHeader(token))
 
-    return goalId
+    return bookId
+}
+
+// Read user book
+const readBook = async (bookId, token) => {
+    const response = await axios.put(API_URL + bookId + '/mark-read', {}, getHeader(token))
+
+    return response.data
 }
 
 function getHeader(token) {
@@ -34,7 +41,8 @@ function getHeader(token) {
 const bookService = {
     createBook,
     getBooks,
-    deleteBook
+    deleteBook,
+    readBook
 }
 
 export default bookService

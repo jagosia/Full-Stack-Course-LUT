@@ -14,6 +14,10 @@ function Dashboard() {
     let books = useSelector(
         (state) => state.books.books
     )
+    let booksToRead = books.filter(x => x.status == 'to-read')
+
+    let booksRead = books.filter(x => x.status == 'read')
+    
     useEffect(() => {
         if (isError) {
             console.log(message);
@@ -38,16 +42,30 @@ function Dashboard() {
                     <p>Add book to your list:</p>
                     <BookForm />
                 </div>
-
+                
                 <section className='content'>
-                    {books.length > 0 ? (
+                    <h2>Books to read</h2>
+                    {booksToRead.length > 0 ? (
                         <div className='books'>
-                            {books.map((book) => (
+                            {booksToRead.map((book) => (
                                 <BookItem key={book._id} book={book} />
                             ))}
                         </div>
                     ) : (
-                        <h3>You have not set any books</h3>
+                        <h3>You have not set any new books to read</h3>
+                    )}
+                </section>
+
+                <section className='content'>
+                    <h2>Read books</h2>
+                    {booksRead.length > 0 ? (
+                        <div className='books'>
+                            {booksRead.map((book) => (
+                                <BookItem key={book._id} book={book} />
+                            ))}
+                        </div>
+                    ) : (
+                        <h3>You have not set any read books</h3>
                     )}
                 </section>
             </>

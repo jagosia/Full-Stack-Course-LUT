@@ -1,16 +1,18 @@
 import { useDispatch } from 'react-redux'
-import { deleteBook } from '../features/books/bookSlice'
+import { deleteBook, readBook } from '../features/books/bookSlice'
 
 function BookItem({ book }) {
   const dispatch = useDispatch()
-
   return (
     <div className='book'>
       <h2>{book.title}</h2>
       <p>{book.author}</p>
-      <button onClick={() => dispatch(deleteBook(book._id))} className='close'>
-        X
-      </button>
+
+      {book.status === 'to-read' && (
+        <button class='read-button' onClick={() => dispatch(readBook(book._id))}>I've read it!</button>
+      )}
+
+      <button onClick={() => dispatch(deleteBook(book._id))} className='close'>X</button>
     </div>
   )
 }

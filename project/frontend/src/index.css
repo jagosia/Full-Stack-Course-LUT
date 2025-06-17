@@ -130,6 +130,7 @@ a:hover {
   0% {
     transform: rotate(0deg);
   }
+
   100% {
     transform: rotate(360deg);
   }
@@ -257,4 +258,11 @@ a:hover {
 
 .close:hover {
   background: #4b088a;
+}
+
+.book .read-button {
+  width: 100%;
+  margin-top: 10px;
+  font-size: 12px;
+  padding: 5px;
 }
